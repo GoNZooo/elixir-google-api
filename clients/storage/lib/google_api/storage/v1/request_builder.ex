@@ -150,7 +150,7 @@ defmodule GoogleApi.Storage.V1.RequestBuilder do
   {:ok, struct} on success
   {:error, info} on failure
   """
-  @spec decode(Tesla.Env.t(), struct() | false, keyword()) :: {:ok, struct()} | {:error, Tesla.Env.t}
+  @spec decode(Tesla.Env.t(), struct() | false, keyword()) :: {:ok, struct()} | {:error, Tesla.Env.t} | {:ok, Tesla.Env.t()}
   def decode(env, struct \\ nil, opts \\ [])
 
   def decode(%Tesla.Env{status: status} = env, _struct, _opts) when status not in @successful_request_response do
