@@ -155,8 +155,14 @@ defmodule {{moduleName}}.RequestBuilder do
     end
   end
 
-  def decode(%Tesla.Env{body: body}, struct, _opts) do
-    Poison.decode(body, as: struct);
+  def decode(%Tesla.Env{body: body, query: query} = env, struct, _opts) do
+    case Keyword.get(query, :alt, :json) do
+      :media ->
+        {:ok, env}
+
+      _other ->
+        Poison.decode(body, as: struct)
+    end
   end
 end
 
